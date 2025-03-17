@@ -60,7 +60,7 @@
         left: 45px; /* Start the text from the top-left corner */
         font-size: 1.5em; /* Adjust font size */
         color: #fff33a;
-        font-family: 'Courier New', monospace;
+        font-family: "Courier New", monospace;
         white-space: normal; /* Allow text to wrap to the next line */
         overflow: hidden; /* Hides the extra text while it's typing */
         text-align: left; /* Align text to the left */
@@ -89,7 +89,7 @@
         top: 85vh; /* Slightly below the image */
         font-size: 1.2em;
         color: #ff0a0a;
-        font-family: 'Arial', sans-serif;
+        font-family: "Arial", sans-serif;
         text-align: center;
         z-index: 2; /* Ensure it's above the background image */
         opacity: 0; /* Initially hidden */
@@ -153,12 +153,14 @@
 
       // Function to simulate typing text, letter by letter (with clickable link)
       function typeText(element) {
-        const text = "A few weeks ago, Tig and I hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we hopped to Perth, across the ";
+        const text =
+          "A few weeks ago, Tig and I hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we hopped to Perth, across the ";
 
         const linkText = "desert."; // The word that will be a link
-        const linkUrl = "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0"; // The URL for the link
+        const linkUrl =
+          "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0"; // The URL for the link
 
-        let currentText = ''; // To hold the currently typed text
+        let currentText = ""; // To hold the currently typed text
         let i = 0; // Counter for typing text
         const speed = 45; // Speed of typing (in milliseconds)
 
@@ -172,10 +174,10 @@
           } else {
             // After regular text is done, add the link
             setTimeout(() => {
-              const link = document.createElement('a');
+              const link = document.createElement("a");
               link.href = linkUrl; // The link URL
               link.textContent = linkText; // The link text
-              link.target = '_blank'; // Open the link in a new tab
+              link.target = "_blank"; // Open the link in a new tab
               element.appendChild(link); // Append the link to the element
               // Show the "Hit link or scroll down" text after typing is complete
               showScrollDown();
@@ -186,11 +188,11 @@
         typeLetter(); // Start typing
       }
 
-      // Function to show the "Hit link or scroll down" text
+      // Function to show the "Hit link or scroll down" text and reveal an image
       function showScrollDown() {
         const scrollDownText = document.createElement("div");
         scrollDownText.classList.add("scroll-down");
-        scrollDownText.textContent = "Hit link or scroll down."; // Updated text
+        scrollDownText.textContent = "Hit link or scroll down.";
 
         // Append the "Hit link or scroll down" text to the body
         document.body.appendChild(scrollDownText);
@@ -198,25 +200,40 @@
         // Fade in the "Hit link or scroll down" text
         setTimeout(() => {
           scrollDownText.style.opacity = 1;
-        }, 100); // Slight delay before showing it
+        }, 100);
+
+        // Create a new container for the image
+        const imageContainer = document.createElement("div");
+        imageContainer.classList.add("new-image-container");
+        imageContainer.style.position = "absolute";
+        imageContainer.style.top = "95vh"; // Position it below the "Hit link or scroll down" text
+        imageContainer.style.width = "100%";
+        imageContainer.style.display = "flex";
+        imageContainer.style.justifyContent = "center";
+        imageContainer.style.opacity = "0"; // Initially hidden
+        imageContainer.style.transition = "opacity 1s ease-in";
+
+        // Create the new image element
+        const newImage = document.createElement("img");
+        newImage.src =
+          "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1742253748725"; // Replace with your image URL
+        newImage.alt = "A meaningful description"; // Set an alt text for accessibility
+        newImage.style.width = "80%"; // Adjust the size as needed
+        newImage.style.maxWidth = "600px"; // Limit the image width for better scaling
+        newImage.style.borderRadius = "10px"; // Optional: Add rounded corners for aesthetics
+
+        // Append the image to the container
+        imageContainer.appendChild(newImage);
+
+        // Append the image container to the body
+        document.body.appendChild(imageContainer);
+
+        // Fade in the image after a delay
+        setTimeout(() => {
+          imageContainer.style.opacity = 1;
+        }, 1500);
       }
 
-      // Function to hide elements on scroll
-      function hideOnScroll() {
-        const imageContainer = document.querySelector(".new-image-container");
-        const typingText = document.querySelector(".typing-text");
-        const scrollDownText = document.querySelector(".scroll-down");
-
-        // Check the scroll position
-        if (window.scrollY > 200) { // You can adjust the scroll threshold as needed
-          if (imageContainer) imageContainer.style.opacity = '0';
-          if (typingText) typingText.style.opacity = '0';
-          if (scrollDownText) scrollDownText.style.opacity = '0';
-        }
-      }
-
-      // Event listeners
-      window.addEventListener("scroll", hideOnScroll); // Listen for scroll events
       const headline = document.getElementById("headline");
 
       // Add event listeners for mouseover and mouseout
