@@ -117,7 +117,7 @@ function showSecondImage() {
 
 function typeTextOnScroll(element) {
   const textBefore =
-    "On our most recent trip, we were stuck in the middle of nowhere for days. Things got pretty ";
+    "Both trips involved being stuck in the middle of nowhere for days. Things got pretty ";
   const clickableWord = "grim.";
 
   let currentText = "";
@@ -188,7 +188,7 @@ function showGrimContainer() {
   // Styled hyperlink
   const link = document.createElement("a");
   link.textContent = "Read about it.";
-  link.href = "https://example.com"; // Change to your desired URL
+  link.href = "page2.html"; // Change to your desired URL
   link.target = "_blank"; // Opens in a new tab
   link.style.fontFamily = "'Courier New', monospace";
   link.style.fontSize = "1.2em";
