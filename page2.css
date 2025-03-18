@@ -1,0 +1,23 @@
+body {
+  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000031.JPG?v=1742290578621");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+    position: fixed;
+    top: 100px;
+    left: 120px;
+    padding: 15px;
+    color: black; /* Default text color */
+    transition: color 0.3s ease-in-out; /* Smooth transition */
+    cursor: pointer;
+}
+
+h1:hover {
+    color: green; /* Changes to red when hovered */
+}
