@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fuck it, bucket.</title>
     <style>
-      /* CSS Styles for the background image */
+      /* Background stays fixed */
       body {
-        background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000002.JPG?v=1742107354452"); /* Replace with your image's path */
-        background-size: cover; /* Makes sure the image covers the entire page */
-        background-position: center; /* Centers the image */
-        background-repeat: repeat-y; /* Allow the background to repeat vertically */
-        margin: 0; /* Removes default margin */
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000002.JPG?v=1742107354452");
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat-y;
+        background-attachment: fixed;
+        margin: 0;
         font-family: Arial, sans-serif;
-        position: relative;
-        flex-direction: column; /* Ensure elements are stacked vertically */
-        height: auto; /* Let the body extend as content grows */
-        min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
 
-      .content {
-        text-align: center;
+      /* Foreground elements scroll separately */
+      .foreground {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 200px;
+        min-height: 100vh;
       }
 
       h1 {
@@ -32,220 +33,230 @@
         color: black;
         transition: color 0.3s ease;
         cursor: pointer;
-        z-index: 2; /* Keep the heading above the image */
       }
 
-      /* Style for the new image container (Top-left quarter of the viewport) */
       .new-image-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50vw; /* 50% of the viewport width (left half) */
-        height: 50vh; /* 50% of the viewport height (top half) */
-        object-fit: cover;
-        z-index: 1; /* Ensure image stays behind the text */
+        position: relative;
+        width: 80%;
+        max-width: 600px;
+        margin-top: 50px;
         display: flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        overflow: hidden;
-        position: relative; /* Necessary for positioning the text inside the image */
-        opacity: 1;
-        transition: opacity 1s ease-out; /* Smooth fade-out transition */
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 1s ease-in;
       }
 
-      /* Style for the text appearing over the image */
       .typing-text {
         position: absolute;
-        top: 45px; /* Start the text from the top-left corner */
-        left: 45px; /* Start the text from the top-left corner */
-        font-size: 1.5em; /* Adjust font size */
+        top: 100px;
+        left: 45px;
+        font-size: 1.5em;
         color: #fff33a;
         font-family: "Courier New", monospace;
-        white-space: normal; /* Allow text to wrap to the next line */
-        overflow: hidden; /* Hides the extra text while it's typing */
-        text-align: left; /* Align text to the left */
-        word-wrap: break-word; /* Ensures text wraps correctly */
-        z-index: 2; /* Ensure text appears above the image */
+        white-space: normal;
+        overflow: hidden;
+        text-align: left;
+        word-wrap: break-word;
         opacity: 1;
-        transition: opacity 1s ease-out; /* Smooth fade-out transition */
+        transition: opacity 1s ease-out;
       }
 
-      /* Style for the hyperlink */
-      a {
-        color: #fff33a; /* Set the color of the link */
-        text-decoration: underline; /* Make the link underlined */
-        transition: color 0.3s ease, transform 0.2s ease;
-      }
-
-      /* Style for hyperlink hover */
-      a:hover {
-        color: #ff0a0a; /* Change color on hover */
-        transform: scale(1.1); /* Slightly enlarge the link on hover */
-      }
-
-      /* Style for the "Scroll Down" text */
       .scroll-down {
-        position: absolute;
-        top: 85vh; /* Slightly below the image */
         font-size: 1.2em;
         color: #ff0a0a;
         font-family: "Arial", sans-serif;
         text-align: center;
-        z-index: 2; /* Ensure it's above the background image */
-        opacity: 0; /* Initially hidden */
-        transition: opacity 1s ease-out; /* Smooth fade-in */
+        opacity: 0;
+        transition: opacity 1s ease-out;
+        margin-top: 30px;
       }
 
-      /* Media query for responsiveness */
+      /* Text that appears over the second image */
+      .scroll-triggered-text {
+        position: absolute;
+        top: 45px;
+        left: 45px;
+        font-size: 1.5em;
+        color: #fff33a;
+        font-family: "Courier New", monospace;
+        white-space: normal;
+        overflow: hidden;
+        text-align: left;
+        word-wrap: break-word;
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
+
       @media (max-width: 768px) {
         .new-image-container {
           width: 100vw;
           height: 50vh;
         }
       }
+
+      h1:hover {
+        color: red;
+      }
+
+      .typing-text a {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+      .typing-text a:hover {
+        color: red;
+      }
     </style>
   </head>
   <body>
-    <div class="content">
+    <div class="foreground">
       <h1 id="headline">Fuck it, bucket.</h1>
     </div>
 
     <script>
-      // Function to change the text color
       function changeTextColor(event, color) {
         event.target.style.color = color;
       }
 
-      // Function to show the new image and typing text when the headline is clicked
       function showNewImage() {
-        // Hide the "Fuck it, bucket." text
-        document.getElementById("headline").style.display = "none";
+        //document.getElementById("headline").style.display = "none";
 
-        // Create a new container for the image
+        const foreground = document.querySelector(".foreground");
+
         const imageContainer = document.createElement("div");
         imageContainer.classList.add("new-image-container");
+        imageContainer.style.opacity = "1"; // Ensure visibility
+        imageContainer.style.position = "relative";
+        imageContainer.style.top = "-200px"; // Moves the image up by 200 pixels
 
-        // Create a new image element
         const newImage = document.createElement("img");
         newImage.src =
-          "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000056.JPG?v=1742110282804"; // Replace with the new image's path
-        newImage.alt = "A scenic view of nature or a similar description"; // Alt text for accessibility
+          "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000056.JPG?v=1742110282804";
+        newImage.alt = "A scenic view of nature";
         newImage.style.width = "100%";
         newImage.style.height = "100%";
         newImage.style.objectFit = "cover";
 
-        // Append the image to the container
         imageContainer.appendChild(newImage);
 
-        // Create and add the typing text container
         const typingText = document.createElement("div");
         typingText.classList.add("typing-text");
 
-        // Append the typing text container to the image container
         imageContainer.appendChild(typingText);
 
-        // Append the image container to the body
-        document.body.appendChild(imageContainer);
+        document.getElementById("headline").insertAdjacentElement("afterend", imageContainer);
 
-        // Start typing the text
-        typeText(typingText);
+        setTimeout(() => {
+          typeText(typingText);
+        }, 500); // Ensure delay before typing starts
       }
 
-      // Function to simulate typing text, letter by letter (with clickable link)
       function typeText(element) {
         const text =
           "A few weeks ago, Tig and I hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we hopped to Perth, across the ";
 
-        const linkText = "desert."; // The word that will be a link
+        const linkText = "desert.";
         const linkUrl =
-          "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0"; // The URL for the link
+          "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0";
 
-        let currentText = ""; // To hold the currently typed text
-        let i = 0; // Counter for typing text
-        const speed = 45; // Speed of typing (in milliseconds)
+        let currentText = "";
+        let i = 0;
+        const speed = 45;
 
-        // Function to type one letter at a time
         function typeLetter() {
           if (i < text.length) {
-            currentText += text.charAt(i); // Add one character to current text
-            element.textContent = currentText; // Update the text content
+            currentText += text.charAt(i);
+            element.textContent = currentText;
             i++;
-            setTimeout(typeLetter, speed); // Call the function again after a delay
+            setTimeout(typeLetter, speed);
           } else {
-            // After regular text is done, add the link
             setTimeout(() => {
               const link = document.createElement("a");
-              link.href = linkUrl; // The link URL
-              link.textContent = linkText; // The link text
-              link.target = "_blank"; // Open the link in a new tab
-              element.appendChild(link); // Append the link to the element
-              // Show the "Hit link or scroll down" text after typing is complete
+              link.href = linkUrl;
+              link.textContent = linkText;
+              link.target = "_blank";
+              element.appendChild(link);
               showScrollDown();
-            }, speed); // After typing text finishes, delay before adding the link
+            }, speed);
           }
         }
 
-        typeLetter(); // Start typing
+        typeLetter();
       }
 
-      // Function to show the "Hit link or scroll down" text and reveal an image
       function showScrollDown() {
         const scrollDownText = document.createElement("div");
         scrollDownText.classList.add("scroll-down");
         scrollDownText.textContent = "Hit link or scroll down.";
 
-        // Append the "Hit link or scroll down" text to the body
-        document.body.appendChild(scrollDownText);
+        const foreground = document.querySelector(".foreground");
+        foreground.appendChild(scrollDownText);
 
-        // Fade in the "Hit link or scroll down" text
         setTimeout(() => {
           scrollDownText.style.opacity = 1;
+          scrollDownText.style.position = "relative";
+          scrollDownText.style.top = "-100px"; // Adjust this value as needed
         }, 100);
 
-        // Create a new container for the image
+        showSecondImage();
+      }
+
+      function showSecondImage() {
+        const foreground = document.querySelector(".foreground");
+
         const imageContainer = document.createElement("div");
         imageContainer.classList.add("new-image-container");
-        imageContainer.style.position = "absolute";
-        imageContainer.style.top = "95vh"; // Position it below the "Hit link or scroll down" text
-        imageContainer.style.width = "100%";
-        imageContainer.style.display = "flex";
-        imageContainer.style.justifyContent = "center";
-        imageContainer.style.opacity = "0"; // Initially hidden
-        imageContainer.style.transition = "opacity 1s ease-in";
+        imageContainer.style.position = "relative";
 
-        // Create the new image element
         const newImage = document.createElement("img");
         newImage.src =
-          "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1742253748725"; // Replace with your image URL
-        newImage.alt = "A meaningful description"; // Set an alt text for accessibility
-        newImage.style.width = "80%"; // Adjust the size as needed
-        newImage.style.maxWidth = "600px"; // Limit the image width for better scaling
-        newImage.style.borderRadius = "10px"; // Optional: Add rounded corners for aesthetics
+          "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1742253748725";
+        newImage.alt = "A meaningful description";
+        newImage.style.width = "100%";
+        newImage.style.borderRadius = "10px";
 
-        // Append the image to the container
+        const textOverlay = document.createElement("div");
+        textOverlay.classList.add("scroll-triggered-text");
+
         imageContainer.appendChild(newImage);
+        imageContainer.appendChild(textOverlay);
+        foreground.appendChild(imageContainer);
 
-        // Append the image container to the body
-        document.body.appendChild(imageContainer);
-
-        // Fade in the image after a delay
         setTimeout(() => {
           imageContainer.style.opacity = 1;
         }, 1500);
+
+        window.addEventListener("scroll", function showTextOnScroll() {
+          typeTextOnScroll(textOverlay);
+          window.removeEventListener("scroll", showTextOnScroll);
+        });
       }
 
-      const headline = document.getElementById("headline");
+      function typeTextOnScroll(element) {
+        const text = "We were stuck in the middle of nowhere for days on our most recent trip. Things got pretty grim.";
+        let currentText = "";
+        let i = 0;
+        const speed = 45;
 
-      // Add event listeners for mouseover and mouseout
-      headline.addEventListener("mouseover", (event) =>
-        changeTextColor(event, "#ff0a0a")
-      );
-      headline.addEventListener("mouseout", (event) =>
-        changeTextColor(event, "black")
-      );
+        function typeLetter() {
+          if (i < text.length) {
+            currentText += text.charAt(i);
+            element.textContent = currentText;
+            i++;
+            setTimeout(typeLetter, speed);
+          } else {
+            element.style.opacity = 1;
+          }
+        }
 
-      // Add event listener for clicking on the headline
-      headline.addEventListener("click", showNewImage);
+        element.style.opacity = 1;
+        typeLetter();
+      }
+
+      document
+        .getElementById("headline")
+        .addEventListener("click", showNewImage);
     </script>
   </body>
 </html>
