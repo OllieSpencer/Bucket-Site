@@ -1,0 +1,99 @@
+body {
+  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000002.JPG?v=1742107354452");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.foreground {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 200px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2em;
+  color: black;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.new-image-container {
+  position: relative;
+  width: 80%;
+  max-width: 600px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+.typing-text {
+  position: absolute;
+  top: 100px;
+  left: 45px;
+  font-size: 1.5em;
+  color: #fff33a;
+  font-family: "Courier New", monospace;
+  white-space: normal;
+  overflow: hidden;
+  text-align: left;
+  word-wrap: break-word;
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.scroll-down {
+  font-size: 1.2em;
+  color: #ff0a0a;
+  font-family: "Arial", sans-serif;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  margin-top: 30px;
+}
+
+.scroll-triggered-text {
+  position: absolute;
+  top: 45px;
+  left: 45px;
+  font-size: 1.5em;
+  color: #fff33a;
+  font-family: "Courier New", monospace;
+  white-space: normal;
+  overflow: hidden;
+  text-align: left;
+  word-wrap: break-word;
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+
+@media (max-width: 768px) {
+  .new-image-container {
+    width: 100vw;
+    height: 50vh;
+  }
+}
+
+h1:hover {
+  color: red;
+}
+
+.typing-text a {
+  color: red;
+  text-decoration: underline;
+}
+
+.typing-text a:hover {
+  color: white;
+}
