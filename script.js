@@ -38,7 +38,7 @@ function typeText(element) {
   const text =
     "A few weeks ago, Tig and I hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwillingly hopped to Perth, across the ";
 
-  const linkText = "desert.";
+  const linkText = "Nullarbor.";
   const linkUrl =
     "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0";
 
@@ -70,7 +70,7 @@ function typeText(element) {
 function showScrollDown() {
   const scrollDownText = document.createElement("div");
   scrollDownText.classList.add("scroll-down");
-  scrollDownText.textContent = "Hit link, then come back and scroll down.";
+  scrollDownText.textContent = "Hit link, or stay and scroll down.";
 
   const foreground = document.querySelector(".foreground");
   foreground.appendChild(scrollDownText);
@@ -117,7 +117,7 @@ function showSecondImage() {
 
 function typeTextOnScroll(element) {
   const textBefore =
-    "Both trips involved being stuck in the middle of nowhere for days. Things got pretty ";
+    "Both trips involved being stuck in the middle of nowhere for days. Things became ";
   const clickableWord = "grim.";
 
   let currentText = "";

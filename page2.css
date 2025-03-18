@@ -9,14 +9,15 @@ body {
 }
 
 h1 {
-  position: relative;
-  left: 150px;
-  font-size: 2em;
-  color: black;
-  transition: color 0.3s ease;
-  cursor: pointer;
+    position: fixed;
+    top: 100px;
+    left: 120px;
+    padding: 15px;
+    color: black; /* Default text color */
+    transition: color 0.3s ease-in-out; /* Smooth transition */
+    cursor: pointer;
 }
 
 h1:hover {
-  color: red;  /* Changes to red on hover */
+    color: green; /* Changes to red when hovered */
 }
