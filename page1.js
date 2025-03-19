@@ -117,7 +117,7 @@ function showSecondImage() {
 
 function typeTextOnScroll(element) {
   const textBefore =
-    "Both trips involved being stuck in the middle of nowhere for days. Things became ";
+    "Both trips involved being stuck in the middle of nowhere for days. It was ";
   const clickableWord = "grim.";
 
   let currentText = "";
