@@ -163,7 +163,7 @@ function showSecondImage() {
     "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1742253748725";
   newImage.alt = "A meaningful description";
   newImage.style.width = "100%";
-  newImage.style.borderRadius = "10px";
+  newImage.style.borderRadius = "0"; // Change this line to remove rounded corners
 
   const textOverlay = document.createElement("div");
   textOverlay.classList.add("scroll-triggered-text");
