@@ -21,3 +21,22 @@ h1 {
 h1:hover {
     color: green; /* Changes to red when hovered */
 }
+
+div {
+    position: relative;
+    left: 10px;
+    top: 10px;
+    color: black;
+    font-family: "Courier New", monospace;
+    font-weight: bold; 
+}
+
+video {
+    display: none;
+    width: 25%;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
