@@ -10,8 +10,8 @@ body {
 
 h1 {
     position: fixed;
-    top: 100px;
-    left: 120px;
+    top: 130px;
+    left: 160px;
     padding: 15px;
     color: black; /* Default text color */
     transition: color 0.3s ease-in-out; /* Smooth transition */

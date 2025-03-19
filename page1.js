@@ -1,3 +1,5 @@
+document.body.style.overflow = "hidden";
+
 function changeTextColor(event, color) {
   event.target.style.color = color;
 }
@@ -84,13 +86,11 @@ function typeText(element) {
 }
 
 function showVideo(parentElement, videoUrl) {
-  // Remove existing video if one is already present
   const existingVideo = document.querySelector(".video-container");
   if (existingVideo) {
     existingVideo.remove();
   }
 
-  // Create video container
   const videoContainer = document.createElement("div");
   videoContainer.classList.add("video-container");
   videoContainer.style.position = "fixed";
@@ -98,25 +98,22 @@ function showVideo(parentElement, videoUrl) {
   videoContainer.style.left = "50%";
   videoContainer.style.transform = "translate(-50%, -50%)";
   videoContainer.style.zIndex = "1000";
-  
-  // Create the video element
+
   const video = document.createElement("video");
   video.src = videoUrl;
   video.controls = true;
   video.autoplay = true;
   video.style.display = "block";
-  video.style.maxWidth = "90vw"; // Ensures it doesn't overflow the viewport
-  video.style.maxHeight = "90vh"; // Ensures it doesn't overflow the viewport
+  video.style.maxWidth = "90vw";
+  video.style.maxHeight = "90vh";
 
-  // Append video to container
   videoContainer.appendChild(video);
   document.body.appendChild(videoContainer);
 
-  // Adjust size dynamically based on video metadata
   video.addEventListener("loadedmetadata", function () {
     const aspectRatio = video.videoWidth / video.videoHeight;
-    let maxWidth = window.innerWidth * 0.8; // 80% of viewport width
-    let maxHeight = window.innerHeight * 0.8; // 80% of viewport height
+    let maxWidth = window.innerWidth * 0.8;
+    let maxHeight = window.innerHeight * 0.8;
 
     if (maxWidth / maxHeight > aspectRatio) {
       video.style.height = `${maxHeight}px`;
@@ -127,10 +124,9 @@ function showVideo(parentElement, videoUrl) {
     }
   });
 
-  // Remove video when it ends & show scroll-down text
   video.addEventListener("ended", function () {
     videoContainer.remove();
-    showScrollDown(); // Now triggers only after the video finishes
+    showScrollDown();
   });
 }
 
@@ -146,6 +142,9 @@ function showScrollDown() {
     scrollDownText.style.opacity = 1;
     scrollDownText.style.position = "relative";
     scrollDownText.style.top = "-100px";
+
+    // Re-enable scrolling once text appears
+    document.body.style.overflow = "auto";
   }, 100);
 
   showSecondImage();
@@ -184,7 +183,7 @@ function showSecondImage() {
 
 function typeTextOnScroll(element) {
   const textBefore =
-    "Both trips involved being stuck in the middle of nowhere for days. It was ";
+    "Both trips involved being stuck in the middle of nowhere for days. It was pretty ";
   const clickableWord = "grim.";
 
   let currentText = "";
