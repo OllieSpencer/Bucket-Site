@@ -17,6 +17,7 @@ body {
   justify-content: flex-start;
   padding-top: 200px;
   min-height: 100vh;
+  padding-bottom: 200px; /* Adds space at the bottom */
 }
 
 h1 {
