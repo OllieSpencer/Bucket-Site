@@ -40,7 +40,7 @@ function typeText(element) {
 
   const linkText = "Nullarbor.";
   const linkUrl =
-    "https://www.dropbox.com/scl/fi/gwh70zf7z768sc318ve6u/MELBS2PERTH.mp4?rlkey=3bxoapd2950q2j6erz68kmtfy&st=0ji05gu3&dl=0";
+    "https://cdn.glitch.me/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/boomba.MOV?v=1742359731215";
 
   let currentText = "";
   let i = 0;
@@ -55,11 +55,27 @@ function typeText(element) {
     } else {
       setTimeout(() => {
         const link = document.createElement("a");
-        link.href = linkUrl;
+        link.href = "#"; // Prevents navigation
         link.textContent = linkText;
-        link.target = "_blank";
+        link.style.color = "red";
+        link.style.textDecoration = "underline";
+        link.style.cursor = "pointer";
+        link.style.transition = "color 0.3s ease"; // Smooth transition
+
+        // Hover effect: change color to white
+        link.addEventListener("mouseover", function () {
+          link.style.color = "white";
+        });
+        link.addEventListener("mouseout", function () {
+          link.style.color = "red";
+        });
+
+        link.addEventListener("click", (event) => {
+          event.preventDefault(); // Stop default link behavior
+          showVideo(element, linkUrl);
+        });
+
         element.appendChild(link);
-        showScrollDown();
       }, speed);
     }
   }
@@ -67,10 +83,61 @@ function typeText(element) {
   typeLetter();
 }
 
+function showVideo(parentElement, videoUrl) {
+  // Remove existing video if one is already present
+  const existingVideo = document.querySelector(".video-container");
+  if (existingVideo) {
+    existingVideo.remove();
+  }
+
+  // Create video container
+  const videoContainer = document.createElement("div");
+  videoContainer.classList.add("video-container");
+  videoContainer.style.position = "fixed";
+  videoContainer.style.top = "50%";
+  videoContainer.style.left = "50%";
+  videoContainer.style.transform = "translate(-50%, -50%)";
+  videoContainer.style.zIndex = "1000";
+  
+  // Create the video element
+  const video = document.createElement("video");
+  video.src = videoUrl;
+  video.controls = true;
+  video.autoplay = true;
+  video.style.display = "block";
+  video.style.maxWidth = "90vw"; // Ensures it doesn't overflow the viewport
+  video.style.maxHeight = "90vh"; // Ensures it doesn't overflow the viewport
+
+  // Append video to container
+  videoContainer.appendChild(video);
+  document.body.appendChild(videoContainer);
+
+  // Adjust size dynamically based on video metadata
+  video.addEventListener("loadedmetadata", function () {
+    const aspectRatio = video.videoWidth / video.videoHeight;
+    let maxWidth = window.innerWidth * 0.8; // 80% of viewport width
+    let maxHeight = window.innerHeight * 0.8; // 80% of viewport height
+
+    if (maxWidth / maxHeight > aspectRatio) {
+      video.style.height = `${maxHeight}px`;
+      video.style.width = `${maxHeight * aspectRatio}px`;
+    } else {
+      video.style.width = `${maxWidth}px`;
+      video.style.height = `${maxWidth / aspectRatio}px`;
+    }
+  });
+
+  // Remove video when it ends & show scroll-down text
+  video.addEventListener("ended", function () {
+    videoContainer.remove();
+    showScrollDown(); // Now triggers only after the video finishes
+  });
+}
+
 function showScrollDown() {
   const scrollDownText = document.createElement("div");
   scrollDownText.classList.add("scroll-down");
-  scrollDownText.textContent = "Hit link, or stay and scroll down.";
+  scrollDownText.textContent = "scroll down";
 
   const foreground = document.querySelector(".foreground");
   foreground.appendChild(scrollDownText);
@@ -131,73 +198,31 @@ function typeTextOnScroll(element) {
       i++;
       setTimeout(typeLetter, speed);
     } else {
-      // Create the clickable "grim" word
-      const grimSpan = document.createElement("span");
-      grimSpan.textContent = clickableWord;
-      grimSpan.style.color = "red";
-      grimSpan.style.cursor = "pointer";
-      grimSpan.style.textDecoration = "underline";
-      grimSpan.style.transition = "color 0.3s ease";
+      // Create the clickable "grim" link
+      const grimLink = document.createElement("a");
+      grimLink.textContent = clickableWord;
+      grimLink.href = "page2.html"; // Directly links to page2
+      grimLink.style.color = "red";
+      grimLink.style.cursor = "pointer";
+      grimLink.style.textDecoration = "underline";
+      grimLink.style.transition = "color 0.3s ease";
 
       // Hover effect
-      grimSpan.addEventListener("mouseover", function () {
-        grimSpan.style.color = "white";
+      grimLink.addEventListener("mouseover", function () {
+        grimLink.style.color = "white";
       });
 
-      grimSpan.addEventListener("mouseout", function () {
-        grimSpan.style.color = "red";
+      grimLink.addEventListener("mouseout", function () {
+        grimLink.style.color = "red";
       });
 
-      // Add click event to "grim"
-      grimSpan.addEventListener("click", showGrimContainer);
-
-      element.appendChild(grimSpan);
+      element.appendChild(grimLink);
       element.style.opacity = 1;
     }
   }
 
   element.style.opacity = 1;
   typeLetter();
-}
-
-function showGrimContainer() {
-  const scrollDownText = document.querySelector(".scroll-down");
-
-  if (!scrollDownText) return;
-
-  const rect = scrollDownText.getBoundingClientRect();
-  const parent = scrollDownText.parentElement;
-
-  if (!parent) return;
-
-  const newContainer = document.createElement("div");
-  newContainer.style.position = "absolute";
-  newContainer.style.top = `${rect.top + window.scrollY}px`;
-  newContainer.style.left = `${rect.left}px`;
-  newContainer.style.width = `${rect.width}px`;
-  newContainer.style.height = `${rect.height}px`;
-  newContainer.style.backgroundColor = "black";
-  newContainer.style.display = "flex";
-  newContainer.style.alignItems = "center";
-  newContainer.style.justifyContent = "center";
-  newContainer.style.borderRadius = "10px";
-  newContainer.style.padding = "10px";
-  newContainer.style.textAlign = "center";
-  newContainer.style.zIndex = "10";
-
-  // Styled hyperlink
-  const link = document.createElement("a");
-  link.textContent = "Read about it.";
-  link.href = "page2.html"; // Change to your desired URL
-  link.target = "_blank"; // Opens in a new tab
-  link.style.fontFamily = "'Courier New', monospace";
-  link.style.fontSize = "1.2em";
-  link.style.color = "#ffcc00";
-  link.style.textDecoration = "underline";
-
-  newContainer.appendChild(link);
-  parent.appendChild(newContainer);
-  scrollDownText.style.visibility = "hidden";
 }
 
 document.getElementById("headline").addEventListener("click", showNewImage);
