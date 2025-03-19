@@ -1,4 +1,4 @@
-const text = "On both occasions, we were stranded in a remote town in South Australia called Port Augusta, for reasons unbeknownst to us and beyond our control. Trying times indeed.";
+const text = "On both occasions, for reasons unbeknownst to us, we were stranded in a remote town in Port Augusta. Getting out of there was tricky, but things were beyond our control.";
 const typingSpeed = 30;
 let index = 0;
 
