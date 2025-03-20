@@ -1,33 +1,36 @@
-const text = "On both occasions, for reasons unbeknownst to us, we were stranded in the desert. Getting out of there was tricky, but things were beyond our control.";
-const typingSpeed = 30;
-let index = 0;
-
-function typeWriter() {
-    const typingElement = document.getElementById("typingText");
-    if (typingElement && index < text.length) {
-        typingElement.innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, typingSpeed);
-    }
-}
-
 window.onload = function () {
     const headline = document.getElementById("headline");
     const video = document.getElementById("video");
-    const typingText = document.getElementById("typingText");
+    const image = document.getElementById("myImage");
 
-    if (headline && video && typingText) {
+    const blackBox = document.createElement("div");
+
+    document.body.appendChild(blackBox);
+
+    if (headline && video) {
         headline.addEventListener("click", function () {
-            headline.style.display = "none"; // Hide the headline
-            video.style.display = "block"; // Show the video
-            typingText.style.display = "block"; // Show the text container
-
-            video.play(); // Start video
-            typeWriter(); // Start the typewriter effect
+            headline.style.display = "none"; 
+            video.style.display = "block"; 
+            video.play();
         });
 
-        // Ensure the text is hidden until the headline is clicked
-        typingText.style.display = "none";
         video.style.display = "none";
+
+        blackBox.style.position = "absolute";
+        blackBox.style.backgroundColor = "black";
+        blackBox.style.display = "none";
+
+        video.onended = function () {
+            const rect = video.getBoundingClientRect();
+            blackBox.style.width = `${rect.width}px`;
+            blackBox.style.height = `${rect.height}px`;
+            blackBox.style.left = `${rect.left}px`;
+            blackBox.style.top = `${rect.top}px`;
+
+            video.style.display = "none";
+            blackBox.style.display = "block";
+
+            image.style.display = "block"; // Show the image after the video ends
+        };
     }
 };
