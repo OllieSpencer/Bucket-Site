@@ -141,7 +141,7 @@ function showScrollDown() {
   setTimeout(() => {
     scrollDownText.style.opacity = 1;
     scrollDownText.style.position = "relative";
-    scrollDownText.style.top = "-100px";
+    scrollDownText.style.top = "-180px";
 
     // Re-enable scrolling once text appears
     document.body.style.overflow = "auto";
