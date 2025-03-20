@@ -1,3 +1,15 @@
+#myImage {
+  display: none; /* Initially hidden */
+  width: 600px;  /* Adjust the size */
+  height: auto;  /* Maintain aspect ratio */
+  position: absolute; /* Position it absolutely */
+  top: 50%;  /* Vertically center it */
+  right: 200px;  /* Align it to the right side */
+  transform: translateY(-50%); /* Center vertically */
+  margin: 0;
+  z-index: 10;  /* Ensure it is on top of other elements */
+}
+
 body {
   background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000031.JPG?v=1742290578621");
   background-size: cover;
@@ -9,33 +21,25 @@ body {
 }
 
 h1 {
-    position: fixed;
-    top: 130px;
-    left: 160px;
-    padding: 15px;
-    color: black; /* Default text color */
-    transition: color 0.3s ease-in-out; /* Smooth transition */
-    cursor: pointer;
+  position: fixed;
+  top: 130px;
+  left: 160px;
+  padding: 15px;
+  color: black;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 h1:hover {
-    color: green; /* Changes to red when hovered */
-}
-
-div {
-    position: relative;
-    left: 10px;
-    top: 10px;
-    color: black;
-    font-family: "Courier New", monospace;
-    font-weight: bold; 
+  color: green;
 }
 
 video {
-    display: none;
-    width: 25%;
-    margin: 0 auto;
-    position: absolute;
-    top: 50px;
-    left: 120px;
+  display: none;
+  width: 25%;
+  margin: 0 auto;
+  position: absolute;
+  top: 50px;
+  left: 120px;
 }
