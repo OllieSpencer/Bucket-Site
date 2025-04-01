@@ -28,7 +28,6 @@ h1 {
   color: black;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
-  text-decoration: underline;
 }
 
 h1:hover {

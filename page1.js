@@ -38,7 +38,7 @@ function showNewImage() {
 
 function typeText(element) {
   const text =
-    "A few weeks ago, we hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwillingly hopped to Perth, across the ";
+    "A few weeks ago, we hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwittingly hopped to Perth, across the ";
 
   const linkText = "Nullarbor.";
   const linkUrl =
@@ -182,9 +182,9 @@ function showSecondImage() {
 }
 
 function typeTextOnScroll(element) {
-  const textBefore =
-    "Both trips involved being stuck in the middle of nowhere for days. It was pretty ";
-  const clickableWord = "grim.";
+  const textBefore = "Both trips involved being stuck in the middle of ";
+  const clickableWord = "nowhere";
+  const textAfter = " for days.";
 
   let currentText = "";
   let i = 0;
@@ -197,25 +197,24 @@ function typeTextOnScroll(element) {
       i++;
       setTimeout(typeLetter, speed);
     } else {
-      // Create the clickable "grim" link
-      const grimLink = document.createElement("a");
-      grimLink.textContent = clickableWord;
-      grimLink.href = "page2.html"; // Directly links to page2
-      grimLink.style.color = "red";
-      grimLink.style.cursor = "pointer";
-      grimLink.style.textDecoration = "underline";
-      grimLink.style.transition = "color 0.3s ease";
+      const nowhereLink = document.createElement("a");
+      nowhereLink.textContent = clickableWord;
+      nowhereLink.href = "page2.html";
+      nowhereLink.style.color = "red";
+      nowhereLink.style.cursor = "pointer";
+      nowhereLink.style.textDecoration = "underline";
+      nowhereLink.style.transition = "color 0.3s ease";
 
-      // Hover effect
-      grimLink.addEventListener("mouseover", function () {
-        grimLink.style.color = "white";
+      nowhereLink.addEventListener("mouseover", function () {
+        nowhereLink.style.color = "white";
       });
 
-      grimLink.addEventListener("mouseout", function () {
-        grimLink.style.color = "red";
+      nowhereLink.addEventListener("mouseout", function () {
+        nowhereLink.style.color = "red";
       });
 
-      element.appendChild(grimLink);
+      element.appendChild(nowhereLink);
+      element.appendChild(document.createTextNode(textAfter));
       element.style.opacity = 1;
     }
   }
