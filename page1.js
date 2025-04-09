@@ -55,30 +55,39 @@ function typeText(element) {
       i++;
       setTimeout(typeLetter, speed);
     } else {
-      setTimeout(() => {
-        const link = document.createElement("a");
-        link.href = "#"; // Prevents navigation
-        link.textContent = linkText;
+      // Create the hyperlink and type it letter by letter
+      const link = document.createElement("a");
+      link.href = "#"; // Prevents navigation
+      link.style.color = "red";
+      link.style.textDecoration = "underline";
+      link.style.cursor = "pointer";
+      link.style.transition = "color 0.3s ease";
+      
+      // Hover effects
+      link.addEventListener("mouseover", function () {
+        link.style.color = "white";
+      });
+      link.addEventListener("mouseout", function () {
         link.style.color = "red";
-        link.style.textDecoration = "underline";
-        link.style.cursor = "pointer";
-        link.style.transition = "color 0.3s ease"; // Smooth transition
+      });
 
-        // Hover effect: change color to white
-        link.addEventListener("mouseover", function () {
-          link.style.color = "white";
-        });
-        link.addEventListener("mouseout", function () {
-          link.style.color = "red";
-        });
+      link.addEventListener("click", (event) => {
+        event.preventDefault(); // Stop default link behavior
+        showVideo(element, linkUrl);
+      });
 
-        link.addEventListener("click", (event) => {
-          event.preventDefault(); // Stop default link behavior
-          showVideo(element, linkUrl);
-        });
+      element.appendChild(link); // Append the empty link to the text element
 
-        element.appendChild(link);
-      }, speed);
+      let j = 0;
+      function typeLinkLetter() {
+        if (j < linkText.length) {
+          link.textContent += linkText.charAt(j);
+          j++;
+          setTimeout(typeLinkLetter, speed);
+        }
+      }
+
+      typeLinkLetter(); // Start typing the link text
     }
   }
 
@@ -133,10 +142,38 @@ function showVideo(parentElement, videoUrl) {
 function showScrollDown() {
   const scrollDownText = document.createElement("div");
   scrollDownText.classList.add("scroll-down");
-  scrollDownText.textContent = "scroll down";
 
-  const foreground = document.querySelector(".foreground");
-  foreground.appendChild(scrollDownText);
+  // Create the text before "here"
+  const textBefore = document.createTextNode("click ");
+
+  // Create the "here" hyperlink
+  const hereLink = document.createElement("a");
+  hereLink.href = "page3.html"; // Update with the correct link
+  hereLink.textContent = "here";
+  hereLink.style.color = "red";
+  hereLink.style.cursor = "pointer";
+  hereLink.style.textDecoration = "underline";
+  hereLink.style.transition = "color 0.3s ease";
+
+  // Hover effects
+  hereLink.addEventListener("mouseover", function () {
+    hereLink.style.color = "white";
+  });
+
+  hereLink.addEventListener("mouseout", function () {
+    hereLink.style.color = "red";
+  });
+
+  // Create the text after "here"
+  const textAfter = document.createTextNode(" or scroll down");
+
+  // Append everything in order
+  scrollDownText.appendChild(textBefore);
+  scrollDownText.appendChild(hereLink);
+  scrollDownText.appendChild(textAfter);
+
+  // Add it to the foreground
+  document.querySelector(".foreground").appendChild(scrollDownText);
 
   setTimeout(() => {
     scrollDownText.style.opacity = 1;
@@ -182,44 +219,70 @@ function showSecondImage() {
 }
 
 function typeTextOnScroll(element) {
+  console.log("Scroll detected, typing should begin."); // Debugging log
+
   const textBefore = "Both trips involved being stuck in the middle of ";
   const clickableWord = "nowhere";
   const textAfter = " for days.";
 
-  let currentText = "";
   let i = 0;
   const speed = 45;
 
+  // Ensure element is visible before typing starts
+  element.style.opacity = "1";
+
   function typeLetter() {
     if (i < textBefore.length) {
-      currentText += textBefore.charAt(i);
-      element.textContent = currentText;
+      element.appendChild(document.createTextNode(textBefore.charAt(i))); // Append instead of replace
       i++;
       setTimeout(typeLetter, speed);
     } else {
+      console.log("Finished typing textBefore, starting 'nowhere' link."); // Debugging log
+
+      // Create "nowhere" hyperlink
       const nowhereLink = document.createElement("a");
-      nowhereLink.textContent = clickableWord;
       nowhereLink.href = "page2.html";
       nowhereLink.style.color = "red";
       nowhereLink.style.cursor = "pointer";
       nowhereLink.style.textDecoration = "underline";
       nowhereLink.style.transition = "color 0.3s ease";
 
+      // Hover effects
       nowhereLink.addEventListener("mouseover", function () {
         nowhereLink.style.color = "white";
       });
-
       nowhereLink.addEventListener("mouseout", function () {
         nowhereLink.style.color = "red";
       });
 
-      element.appendChild(nowhereLink);
-      element.appendChild(document.createTextNode(textAfter));
-      element.style.opacity = 1;
+      element.appendChild(nowhereLink); // Add empty link first
+
+      let j = 0;
+      function typeLinkLetter() {
+        if (j < clickableWord.length) {
+          nowhereLink.appendChild(document.createTextNode(clickableWord.charAt(j))); // Append instead of replace
+          j++;
+          setTimeout(typeLinkLetter, speed);
+        } else {
+          console.log("Finished typing 'nowhere', starting textAfter."); // Debugging log
+
+          // After typing "nowhere", type remaining text
+          let k = 0;
+          function typeRemainingText() {
+            if (k < textAfter.length) {
+              element.appendChild(document.createTextNode(textAfter.charAt(k))); // Append text
+              k++;
+              setTimeout(typeRemainingText, speed);
+            }
+          }
+          typeRemainingText();
+        }
+      }
+
+      typeLinkLetter(); // Start typing "nowhere"
     }
   }
 
-  element.style.opacity = 1;
   typeLetter();
 }
 
