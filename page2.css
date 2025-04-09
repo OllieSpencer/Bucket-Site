@@ -1,25 +1,39 @@
-#myImage {
-  display: none; /* Initially hidden */
-  width: 600px;  /* Adjust the size */
-  height: auto;  /* Maintain aspect ratio */
-  position: absolute; /* Position it absolutely */
-  top: 50%;  /* Vertically center it */
-  right: 200px;  /* Align it to the right side */
-  transform: translateY(-50%); /* Center vertically */
-  margin: 0;
-  z-index: 10;  /* Ensure it is on top of other elements */
-}
-
+/* Body styling */
 body {
   background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000031.JPG?v=1742290578621");
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
   background-attachment: fixed;
-  margin: 0;
   font-family: Arial, sans-serif;
+  margin: 0; /* Remove default margin */
+  padding-top: 130px; /* Space at the top for headline */
+  padding-bottom: 200px; /* Ensures extra space at the bottom for scrolling */
+  box-sizing: border-box; /* Prevent padding from affecting body height */
+  min-height: 100%; /* Ensure body takes at least the height of the viewport */
+  overflow-y: scroll; /* Allow scrolling */
 }
 
+/* Container for all content */
+#content-container {
+  position: relative;
+  min-height: 100%; /* Ensures content height allows scrolling */
+}
+
+/* Styling for the image */
+#myImage {
+  display: none;
+  width: 600px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  right: 200px;
+  transform: translateY(-50%);
+  margin: 0;
+  z-index: 10;
+}
+
+/* Styling for the headline */
 h1 {
   position: fixed;
   top: 130px;
@@ -28,12 +42,14 @@ h1 {
   color: black;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
+  margin: 0;
 }
 
 h1:hover {
   color: green;
 }
 
+/* Styling for the video */
 video {
   display: none;
   width: 25%;
@@ -41,4 +57,18 @@ video {
   position: absolute;
   top: 50px;
   left: 120px;
+}
+
+/* The black box */
+#blackBox {
+  display: none;
+  position: relative; /* Normal document flow */
+  background-color: black;
+  color: white;
+  top: 150px; /* Starts just after the headline */
+  left: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 5;
+  width: 100%;
 }
