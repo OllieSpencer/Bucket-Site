@@ -8,7 +8,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0; /* Remove default margin */
   padding-top: 130px; /* Space at the top for headline */
-  padding-bottom: 200px; /* Ensures extra space at the bottom for scrolling */
+  padding-bottom: 1030px; /* Ensures extra space at the bottom for scrolling */
   box-sizing: border-box; /* Prevent padding from affecting body height */
   min-height: 100%; /* Ensure body takes at least the height of the viewport */
   overflow-y: scroll; /* Allow scrolling */
@@ -16,7 +16,7 @@ body {
 
 /* Container for all content */
 #content-container {
-  position: relative;
+  position: fixed;
   min-height: 100%; /* Ensures content height allows scrolling */
 }
 
@@ -54,7 +54,7 @@ video {
   display: none;
   width: 25%;
   margin: 0 auto;
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: 120px;
 }
@@ -62,7 +62,7 @@ video {
 /* The black box */
 #blackBox {
   display: none;
-  position: relative; /* Normal document flow */
+  position: fixed; /* Normal document flow */
   background-color: black;
   color: white;
   top: 150px; /* Starts just after the headline */
