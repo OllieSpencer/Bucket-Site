@@ -112,7 +112,7 @@ function typeText(text, element) {
       if (i < typingParts[0].length) {
         element.innerHTML += typingParts[0][i];
         i++;
-        setTimeout(type, 15);
+        setTimeout(type, 25);
       } else {
         typingStep = "link";
         i = 0;
@@ -123,7 +123,7 @@ function typeText(text, element) {
       if (i < brokenHillText.length) {
         element.lastChild.innerHTML += brokenHillText[i];
         i++;
-        setTimeout(type, 15);
+        setTimeout(type, 25);
       } else {
         typingStep = "after";
         i = 0;
@@ -134,7 +134,7 @@ function typeText(text, element) {
       if (i < typingParts[1].length) {
         element.innerHTML += typingParts[1][i];
         i++;
-        setTimeout(type, 15);
+        setTimeout(type, 25);
       }
     }
   }
