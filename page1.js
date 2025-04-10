@@ -46,7 +46,7 @@ function typeText(element) {
 
   let currentText = "";
   let i = 0;
-  const speed = 45;
+  const speed = 25;
 
   function typeLetter() {
     if (i < text.length) {
@@ -226,7 +226,7 @@ function typeTextOnScroll(element) {
   const textAfter = " for days.";
 
   let i = 0;
-  const speed = 45;
+  const speed = 25;
 
   // Ensure element is visible before typing starts
   element.style.opacity = "1";
