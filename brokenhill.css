@@ -1,0 +1,20 @@
+/* Reset margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body, html {
+    height: 100%;
+}
+
+/* Background image style */
+body {
+    background-image: url('https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/Screenshot%202025-04-10%20at%204.13.24%20pm.png?v=1744265838500'); /* Replace with your actual image */
+    background-size: cover; /* Cover the entire screen */
+    background-position: center; /* Center the image */
+    background-attachment: fixed; /* Fixed background */
+    height: 100vh; /* Ensure the body fills the entire height */
+}

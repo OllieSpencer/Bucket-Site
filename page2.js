@@ -116,7 +116,7 @@ function typeText(text, element) {
       } else {
         typingStep = "link";
         i = 0;
-        element.innerHTML += `<a href="https://en.wikipedia.org/wiki/Broken_Hill" target="_blank" style="color: red; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='red'">`;
+        element.innerHTML += `<a href="https://bucket-site.glitch.me/brokenhill.html" style="color: red; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='red'">`;
         type();
       }
     } else if (typingStep === "link") {
