@@ -9,7 +9,8 @@ window.onload = function () {
 
   // New image to fade in after scroll
   const newImage = document.createElement("img");
-  newImage.src = "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000051.JPG?v=1744243352241"; // Replace with the new image URL
+  newImage.src =
+    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000051.JPG?v=1744243352241"; // Replace with the new image URL
   newImage.id = "newImage";
   newImage.style.display = "none"; // Initially hidden
   newImage.style.opacity = 0; // Initially invisible
@@ -19,11 +20,9 @@ window.onload = function () {
   newImage.style.width = "600px"; // Same width as #myImage
   newImage.style.height = "auto"; // Maintain aspect ratio
   newImage.style.position = "absolute"; // Ensure it's positioned relative to the document
+  newImage.style.right = `200px`;
+  newImage.style.top = `650px`;
   newImage.style.zIndex = "10"; // Ensure it appears above other elements
-
-  // Position the new image horizontally same as the original image
-  newImage.style.left = `${image.offsetLeft}px`; // Same horizontal position as the original image
-  newImage.style.top = `${image.offsetTop + image.offsetHeight + 20}px`; // 20px below the original image
 
   document.body.appendChild(newImage); // Append the new image to the body
   document.body.appendChild(blackBox);
@@ -97,7 +96,8 @@ window.onload = function () {
   window.addEventListener("scroll", function () {
     console.log("scrollY:", window.scrollY); // Log scroll position for debugging
 
-    if (window.scrollY > 200) { // Adjust this value as needed for the scroll trigger point
+    if (window.scrollY > 200) {
+      // Adjust this value as needed for the scroll trigger point
       if (newImage.style.display === "none") {
         newImage.style.display = "block"; // Make the image visible
         setTimeout(function () {
@@ -108,15 +108,30 @@ window.onload = function () {
   });
 };
 
-// Typing effect function
 function typeText(text, element) {
   let i = 0;
-  element.textContent = "";
+  let typingText = text.split("Broken Hill"); // Split the text into parts
+
+  // Start typing the first part (before "Broken Hill")
   function type() {
-    if (i < text.length) {
-      element.textContent += text[i];
+    if (i < typingText[0].length) {
+      element.innerHTML += typingText[0][i]; // Type character by character
       i++;
-      setTimeout(type, 15); // Adjust speed of typing here
+      setTimeout(type, 15);
+    } else {
+      // Once the first part is typed, insert the clickable "Broken Hill"
+      element.innerHTML += `<a href="https://en.wikipedia.org/wiki/Broken_Hill" target="_blank" style="color: red; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='red'">Broken Hill</a>`;
+
+      // Now type the remaining part of the text after "Broken Hill"
+      let j = 0;
+      function continueTyping() {
+        if (j < typingText[1].length) {
+          element.innerHTML += typingText[1][j]; // Continue typing the second part
+          j++;
+          setTimeout(continueTyping, 15);
+        }
+      }
+      continueTyping();
     }
   }
   type();
