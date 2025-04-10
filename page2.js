@@ -3,33 +3,35 @@ window.onload = function () {
   const video = document.getElementById("video");
   const image = document.getElementById("myImage");
 
-  const blackBox = document.createElement("div");
-  blackBox.id = "blackBox";
-  const textElement = document.createElement("p"); // Typing text
+  // Typing text element (was inside blackBox, now independent)
+  const textElement = document.createElement("p");
+  textElement.style.color = "black";
+  textElement.style.fontSize = "20px";
+  textElement.style.fontFamily = "monospace";
+  textElement.style.position = "absolute";
+  textElement.style.opacity = 0; // Initially hidden
+  textElement.style.transition = "opacity 1s ease";
+  textElement.style.paddingBottom = "200px"; // Fade-in effect
 
-  // New image to fade in after scroll
+  // New image to fade in after scrolling
   const newImage = document.createElement("img");
   newImage.src =
-    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000051.JPG?v=1744243352241"; // Replace with the new image URL
+    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000051.JPG?v=1744243352241";
   newImage.id = "newImage";
-  newImage.style.display = "none"; // Initially hidden
-  newImage.style.opacity = 0; // Initially invisible
-  newImage.style.transition = "opacity 1s ease-in"; // Fade-in effect over 1 second
+  newImage.style.display = "none";
+  newImage.style.opacity = 0;
+  newImage.style.transition = "opacity 1s ease-in";
+  newImage.style.width = "600px";
+  newImage.style.height = "auto";
+  newImage.style.position = "absolute";
+  newImage.style.right = "200px";
+  newImage.style.top = "700px";
+  newImage.style.zIndex = "10";
 
-  // Apply the same size as the original image
-  newImage.style.width = "600px"; // Same width as #myImage
-  newImage.style.height = "auto"; // Maintain aspect ratio
-  newImage.style.position = "absolute"; // Ensure it's positioned relative to the document
-  newImage.style.right = `200px`;
-  newImage.style.top = `650px`;
-  newImage.style.zIndex = "10"; // Ensure it appears above other elements
+  document.body.appendChild(newImage);
+  document.body.appendChild(textElement);
 
-  document.body.appendChild(newImage); // Append the new image to the body
-  document.body.appendChild(blackBox);
-  blackBox.appendChild(textElement);
-
-  // Disable scrolling as soon as the page loads
-  document.body.style.overflow = "hidden"; // Disable scrolling immediately
+  document.body.style.overflow = "hidden"; // Disable scrolling on page load
 
   if (headline && video && image) {
     headline.addEventListener("click", function () {
@@ -39,100 +41,103 @@ window.onload = function () {
     });
 
     video.style.display = "none";
-
-    // Style the black box
-    blackBox.style.position = "absolute";
-    blackBox.style.backgroundColor = "black";
-    blackBox.style.display = "none"; // Initially hidden
-    blackBox.style.opacity = 0; // Initially invisible
-    blackBox.style.transition = "opacity 1s ease"; // Apply fade-in transition
-
-    // Style the text element (start from top-left of black box)
-    textElement.style.color = "#fff33a";
-    textElement.style.fontSize = "20px";
-    textElement.style.fontFamily = "monospace";
-    textElement.style.position = "absolute";
-    textElement.style.top = "-10px"; // Move text up slightly
-    textElement.style.left = "10px";
-    textElement.style.whiteSpace = "pre-wrap";
-
-    // Add initial styling to the image
-    image.style.display = "none"; // Initially hide the image
-    image.style.opacity = 0; // Set opacity to 0 (hidden)
-    image.style.transition = "opacity 1s ease-in"; // Fade-in effect over 1 second
+    image.style.display = "none";
+    image.style.opacity = 0;
+    image.style.transition = "opacity 1s ease-in";
 
     video.onended = function () {
       const rect = video.getBoundingClientRect();
-      blackBox.style.width = `${rect.width}px`;
-      blackBox.style.height = `1010px`;
-      blackBox.style.left = `${rect.left}px`;
-      blackBox.style.top = `${rect.top}px`;
+
+      // Set textElement's position to where blackBox used to be
+      textElement.style.width = `${rect.width}px`;
+      textElement.style.height = `1010px`;
+      textElement.style.left = `${rect.left}px`;
+      textElement.style.top = `${rect.top}px`;
 
       video.style.display = "none";
-      blackBox.style.display = "block"; // Show the black box
-      image.style.display = "block"; // Show the image
+      image.style.display = "block";
 
-      // Fade-in both the black box and the image
+      // Fade-in effect for text and image
       setTimeout(function () {
-        blackBox.style.opacity = 1; // Fade in the black box
-        image.style.opacity = 1; // Fade in the image
-      }, 50); // Slight delay to ensure display change happens first
+        textElement.style.opacity = 1;
+        image.style.opacity = 1;
+      }, 50);
 
-      // Start the typing effect immediately
+      // Start the typing effect with the full original text
       typeText(
-        "Known as the \"Crossroads of Australia,\" the remote town of Port Augusta serves as a transport hub for rail and road networks. It sits north-west of Adelaide, where South Australia transforms from farmland into an arid red desert. Tig and I were confident we’d be able to board the train that travels from the Whyalla Steelworks to Newcastle. The train is scheduled to stop in Port Augusta for about an hour every morning before continuing on. This never happened. We were spotted by a rail worker in a ute when we arrived at the yard, forcing us to run and hide in a bush by the tracks. This bush became our home for 37 hours. For two days, nothing eastbound showed up. Around the 20 hour mark, Tig pulled the trigger on a go for broke supply run. I was sure he'd get pinched leaving the yard, but thankfully he wasn't. The closest water source was a two hour walk away, so there was a chance our only way out of town would pull in and out while Tig was gone. Fat chance. Finally as we were coming to terms with another night's sleep in the bush, an Aurizon train travelling from Perth to Sydney pulled in. We immediately jumped on, only to anxiously wait on board for another three hours, illuminated by a spotlight. At about 3 o'clock in the morning we finally left the \"Crossroads of Australia,\" and were heading east into the desert towards Broken Hill.",
+        'Known as the "Crossroads of Australia," the remote town of Port Augusta serves as a transport hub for rail and road networks. ' +
+          "It sits north-west of Adelaide, where South Australia transforms from farmland into an arid red desert. " +
+          "Tig and I were confident we’d be able to board the train that travels from the Whyalla Steelworks to Newcastle. " +
+          "The train is scheduled to stop in Port Augusta for about an hour every morning before continuing on. " +
+          "This never happened. We were spotted by a rail worker in a ute when we arrived at the yard, forcing us to run and hide in a bush by the tracks. " +
+          "This bush became our home for 37 hours. For two days, nothing eastbound showed up. " +
+          "Around the 20 hour mark, Tig pulled the trigger on a go for broke supply run. " +
+          "I was sure he'd get pinched leaving the yard, but thankfully he wasn't. " +
+          "The closest water source was a two hour walk away, so our only way out of town could of pulled in and out while Tig was gone. " +
+          "Fat chance. Finally as we were coming to terms with another night's sleep in the bush, " +
+          "an Aurizon train travelling from Perth to Sydney pulled in. " +
+          "We immediately jumped on, only to anxiously wait on board for another three hours, illuminated by a spotlight. " +
+          'At about 3 o\'clock in the morning we finally left the "Crossroads of Australia," and were heading east into the desert towards Broken Hill.',
         textElement
       );
 
-      // Once both elements have finished fading in, enable scrolling
-      // Both elements will take 1 second to fade in, so we wait for that duration
       setTimeout(function () {
-        document.body.style.overflow = "auto"; // Re-enable scrolling after 1 second
-      }, 1000); // 1 second to match the fade-in duration
+        document.body.style.overflow = "auto"; // Re-enable scrolling
+      }, 1000);
     };
   }
 
-  // Check if the user has scrolled to a certain point to trigger the fade-in for the new image
+  // Fade in new image when scrolling past a certain point
   window.addEventListener("scroll", function () {
-    console.log("scrollY:", window.scrollY); // Log scroll position for debugging
-
     if (window.scrollY > 200) {
-      // Adjust this value as needed for the scroll trigger point
       if (newImage.style.display === "none") {
-        newImage.style.display = "block"; // Make the image visible
+        newImage.style.display = "block";
         setTimeout(function () {
-          newImage.style.opacity = 1; // Start fading in the image
-        }, 50); // Slight delay to ensure display change happens first
+          newImage.style.opacity = 1;
+        }, 50);
       }
     }
   });
 };
 
+// Typing text effect function
 function typeText(text, element) {
   let i = 0;
-  let typingText = text.split("Broken Hill"); // Split the text into parts
+  let typingParts = text.split("Broken Hill");
+  let brokenHillText = "Broken Hill";
+  let typingStep = "before";
 
-  // Start typing the first part (before "Broken Hill")
   function type() {
-    if (i < typingText[0].length) {
-      element.innerHTML += typingText[0][i]; // Type character by character
-      i++;
-      setTimeout(type, 15);
-    } else {
-      // Once the first part is typed, insert the clickable "Broken Hill"
-      element.innerHTML += `<a href="https://en.wikipedia.org/wiki/Broken_Hill" target="_blank" style="color: red; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='red'">Broken Hill</a>`;
-
-      // Now type the remaining part of the text after "Broken Hill"
-      let j = 0;
-      function continueTyping() {
-        if (j < typingText[1].length) {
-          element.innerHTML += typingText[1][j]; // Continue typing the second part
-          j++;
-          setTimeout(continueTyping, 15);
-        }
+    if (typingStep === "before") {
+      if (i < typingParts[0].length) {
+        element.innerHTML += typingParts[0][i];
+        i++;
+        setTimeout(type, 15);
+      } else {
+        typingStep = "link";
+        i = 0;
+        element.innerHTML += `<a href="https://en.wikipedia.org/wiki/Broken_Hill" target="_blank" style="color: red; text-decoration: underline; transition: color 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='red'">`;
+        type();
       }
-      continueTyping();
+    } else if (typingStep === "link") {
+      if (i < brokenHillText.length) {
+        element.lastChild.innerHTML += brokenHillText[i];
+        i++;
+        setTimeout(type, 15);
+      } else {
+        typingStep = "after";
+        i = 0;
+        element.innerHTML += `</a>`;
+        type();
+      }
+    } else if (typingStep === "after") {
+      if (i < typingParts[1].length) {
+        element.innerHTML += typingParts[1][i];
+        i++;
+        setTimeout(type, 15);
+      }
     }
   }
+
   type();
 }
