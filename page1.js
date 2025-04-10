@@ -62,7 +62,7 @@ function typeText(element) {
       link.style.textDecoration = "underline";
       link.style.cursor = "pointer";
       link.style.transition = "color 0.3s ease";
-      
+
       // Hover effects
       link.addEventListener("mouseover", function () {
         link.style.color = "white";
@@ -260,7 +260,9 @@ function typeTextOnScroll(element) {
       let j = 0;
       function typeLinkLetter() {
         if (j < clickableWord.length) {
-          nowhereLink.appendChild(document.createTextNode(clickableWord.charAt(j))); // Append instead of replace
+          nowhereLink.appendChild(
+            document.createTextNode(clickableWord.charAt(j))
+          ); // Append instead of replace
           j++;
           setTimeout(typeLinkLetter, speed);
         } else {
