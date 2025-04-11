@@ -38,7 +38,7 @@ function showNewImage() {
 
 function typeText(element) {
   const text =
-    "A few weeks ago, we hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwittingly hopped to Perth, across the ";
+    "In February, we hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwittingly hopped to Perth, across the ";
 
   const linkText = "Nullarbor.";
   const linkUrl =

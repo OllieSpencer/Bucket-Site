@@ -65,3 +65,8 @@ body {
   top: 100px;
   left: 1050px;
 }
+
+img {
+    width: 600px; /* Set width */
+    height: auto; /* Maintain aspect ratio */
+}
