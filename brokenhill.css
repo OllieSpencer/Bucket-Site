@@ -1,20 +1,58 @@
 /* Reset margins and padding */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Body styles */
-body, html {
-    height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 /* Background image style */
 body {
-    background-image: url('https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/Screenshot%202025-04-10%20at%204.13.24%20pm.png?v=1744265838500'); /* Replace with your actual image */
-    background-size: cover; /* Cover the entire screen */
-    background-position: center; /* Center the image */
-    background-attachment: fixed; /* Fixed background */
-    height: 100vh; /* Ensure the body fills the entire height */
+  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/Screenshot%202025-04-10%20at%206.01.07%20pm.png?v=1744272162576");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+}
+
+#typewriter {
+  color: #fff33a;
+  font-size: 1.5em;
+  font-family: "Courier New", monospace;
+  position: absolute;
+  top: 100px;
+  left: 900px;
+  white-space: nowrap;
+}
+
+/* Button Styling */
+#typewriter button {
+  color: inherit; /* Inherit text color */
+  font-size: inherit;
+  text-decoration: underline; /* Underline the text */
+  cursor: pointer; /* Make it look clickable */
+  font-family: "Courier New", monospace; /* Match the font */
+}
+
+#myVideo {
+  display: none;
+  width: 300px;
+  height: auto;
+  position: fixed;
+  top: 50px;
+  left: 850px;
+}
+
+#secondVideo {
+  display: none;
+  width: 250px;
+  height: auto;
+  position: fixed;
+  top: 250px;
+  left: 150px;
 }

@@ -241,7 +241,7 @@ function typeTextOnScroll(element) {
 
       // Create "nowhere" hyperlink
       const nowhereLink = document.createElement("a");
-      nowhereLink.href = "page2.html";
+      nowhereLink.href = "portaugusta.html";
       nowhereLink.style.color = "red";
       nowhereLink.style.cursor = "pointer";
       nowhereLink.style.textDecoration = "underline";
