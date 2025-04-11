@@ -67,6 +67,13 @@ body {
 }
 
 img {
-    width: 600px; /* Set width */
-    height: auto; /* Maintain aspect ratio */
+  position: absolute;
+  width: 600px; /* Set width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Keep it in layout but invisible */
+  opacity: 0; /* Start fully transparent */
+  transition: opacity 2s ease-in-out;
+  top: 50%; /* Vertically center it */
+  left: 10%; /* Position it at the middle of the left half */
+  transform: translateY(-50%);
 }
