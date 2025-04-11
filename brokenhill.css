@@ -22,7 +22,7 @@ body {
 
 #typewriter {
   color: #fff33a;
-  font-size: 1.5em;
+  font-size: 20px;
   font-family: "Courier New", monospace;
   position: absolute;
   top: 100px;
@@ -59,29 +59,9 @@ body {
 
 #text {
   color: #fff33a;
-  font-size: 1.5em;
+  font-size: 20px;
   font-family: "Courier New", monospace;
   position: absolute;
   top: 100px;
   left: 1050px;
-  white-space: nowrap;
-  overflow: hidden; /* To hide the extra text during animation */
-  border-right: 2px solid #fff33a; /* Creates the blinking cursor effect */
-  width: 0; /* Start with no text visible */
-  animation: typing 5s steps(30) 1s forwards, blink 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0; /* Start with no text visible */
-  }
-  to {
-    width: 100%; /* Expand the width to reveal the text */
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
 }
