@@ -74,10 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     typeFullText(); // Start typing the full text
   }
-
+  
+  const image = document.querySelector("img");
+  
   // Event listener for when the second video ends
   secondVideo.addEventListener("ended", () => {
     secondVideo.style.display = "none"; // Hide the second video after it ends
+    image.style.opacity = "1";
   });
 
   // Event listener for when the first video ends
