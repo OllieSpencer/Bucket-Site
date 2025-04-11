@@ -59,7 +59,7 @@ h1 {
 .scroll-down {
   font-size: 1.2em;
   color: #ff0a0a;
-  font-family: "Arial", sans-serif;
+  font-family: "Courier New", monospace;
   text-align: center;
   opacity: 0;
   transition: opacity 1s ease-out;
