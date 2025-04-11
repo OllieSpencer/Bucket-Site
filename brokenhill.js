@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("typewriter");
   const video = document.getElementById("myVideo"); // First video
   const secondVideo = document.getElementById("secondVideo"); // Second video
+  const textDiv = document.getElementById("text"); // The #text div
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
@@ -11,6 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let i = 0, j = 0;
+
+  // Initially hide the #text div
+  textDiv.style.display = "none";
 
   // Create a button instead of a link
   const button = document.createElement("button");
@@ -64,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event listener for when the first video ends
   video.addEventListener("ended", () => {
     video.style.display = "none"; // Hide the first video after it ends
+    textDiv.style.display = "block"; // Show the #text div after the first video ends
   });
 
   // Initial typing effect start
