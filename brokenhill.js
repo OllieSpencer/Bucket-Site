@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("typewriter");
   const video = document.getElementById("myVideo"); // First video
   const secondVideo = document.getElementById("secondVideo"); // Second video
+  const textDiv = document.getElementById("text"); // The #text div
+  const fullText = "This is a test."; // Full text for #text div
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
@@ -11,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   let i = 0, j = 0;
+
+  // Initially hide the #text div
+  textDiv.style.display = "none";
 
   // Create a button instead of a link
   const button = document.createElement("button");
@@ -35,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000); // 5000ms (5 seconds) delay before the second video starts
   });
 
-  // Function to type the initial text
+  // Function to type the initial text (for typewriter effect)
   function typeEffect() {
     if (i < text.length) {
       container.textContent += text.charAt(i);
@@ -56,6 +61,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Function to type the content of the #text div
+  function typeTextEffect() {
+    let k = 0;
+    textDiv.textContent = ""; // Clear existing content
+    function typeFullText() {
+      if (k < fullText.length) {
+        textDiv.textContent += fullText.charAt(k);
+        k++;
+        setTimeout(typeFullText, 25); // Adjust typing speed here
+      }
+    }
+    typeFullText(); // Start typing the full text
+  }
+
   // Event listener for when the second video ends
   secondVideo.addEventListener("ended", () => {
     secondVideo.style.display = "none"; // Hide the second video after it ends
@@ -64,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event listener for when the first video ends
   video.addEventListener("ended", () => {
     video.style.display = "none"; // Hide the first video after it ends
+    textDiv.style.display = "block"; // Show the #text div after the first video ends
+    typeTextEffect(); // Start the typing effect on the text div after video ends
   });
 
   // Initial typing effect start
