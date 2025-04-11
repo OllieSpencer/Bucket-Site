@@ -43,6 +43,7 @@ h1 {
   transition: color 0.3s ease-in-out;
   cursor: pointer;
   margin: 0;
+  font-family: "Courier New", monospace;
 }
 
 h1:hover {
