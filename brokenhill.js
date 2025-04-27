@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("myVideo"); // First video
   const secondVideo = document.getElementById("secondVideo"); // Second video
   const textDiv = document.getElementById("text"); // The #text div
-  const fullText = "Once we'd reached the outback, I reflected on my perception of the Australian landscape being skewed by my background. Writing the bush as an alien, inhospitable land to be bested perpetuates a white narrative rooted in a colonial ignorance of country. The juxtaposition of colonial infrastructure against the land amplified these thoughts throughout the trip, the remotest areas of the desert were eerily peppered with disused grain silos and forgotten machinery. "; // Full text for #text div
+  const fullText = "Once we'd reached the outback, I reflected on my perception of the Australian landscape being skewed by my background. Writing the bush as an alien, inhospitable land to be bested perpetuates a white narrative rooted in a colonial ignorance of country. The juxtaposition of farming infrastructure against nature amplified these thoughts throughout the trip, the remotest areas of the desert were eerily peppered with disused grain silos and forgotten machinery. "; // Full text for #text div
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
