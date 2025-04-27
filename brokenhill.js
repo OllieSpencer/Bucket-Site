@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("myVideo"); // First video
   const secondVideo = document.getElementById("secondVideo"); // Second video
   const textDiv = document.getElementById("text"); // The #text div
-  const fullText = "This is a test."; // Full text for #text div
+  const fullText = "Broken Hill inspired the fictional town of Bundanyabba in the film Wake in Fright. If not for the delay in Port Augusta, our plan was to get off there and check it out. Once we'd reached the outback, I reflected on how my perception of the Australian landscape was skewed by my background. The juxtaposition of colonial infrastructure against the land amplified this internal conflict throughout the trip. The remote landscapes en route were eerily broken by disused grain silos and forgotten machinery."; // Full text for #text div
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (i < text.length) {
       container.textContent += text.charAt(i);
       i++;
-      setTimeout(typeEffect, 45); // Adjust typing speed here
+      setTimeout(typeEffect, 15); // Adjust typing speed here
     } else if (i === text.length) {
       container.appendChild(button); // Append the button after typing the text
       typeClickableText();
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (j < clickableText.length) {
       button.textContent += clickableText.charAt(j);
       j++;
-      setTimeout(typeClickableText, 45); // Adjust typing speed here
+      setTimeout(typeClickableText, 15); // Adjust typing speed here
     }
   }
 
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (k < fullText.length) {
         textDiv.textContent += fullText.charAt(k);
         k++;
-        setTimeout(typeFullText, 25); // Adjust typing speed here
+        setTimeout(typeFullText, 15); // Adjust typing speed here
       }
     }
     typeFullText(); // Start typing the full text
