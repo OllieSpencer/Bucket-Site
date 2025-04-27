@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const video = document.getElementById("myVideo"); // First video
   const secondVideo = document.getElementById("secondVideo"); // Second video
   const textDiv = document.getElementById("text"); // The #text div
-  const fullText = "Broken Hill inspired the fictional town of Bundanyabba in the film Wake in Fright. If not for the delay in Port Augusta, our plan was to get off there and check it out. Once we'd reached the outback, I reflected on how my perception of the Australian landscape was skewed by my background. The juxtaposition of colonial infrastructure against the land amplified this internal conflict throughout the trip. The remote landscapes en route were eerily broken by disused grain silos and forgotten machinery."; // Full text for #text div
+  const fullText = "Once we'd reached the outback, I reflected on my perception of the Australian landscape being skewed by my background. Writing the bush as an alien, inhospitable land to be bested perpetuates a white narrative rooted in a colonial ignorance of country. The juxtaposition of colonial infrastructure against the land amplified these thoughts throughout the trip, the remotest areas of the desert were eerily peppered with disused grain silos and forgotten machinery. "; // Full text for #text div
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
