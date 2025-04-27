@@ -38,15 +38,15 @@ function showNewImage() {
 
 function typeText(element) {
   const text =
-    "In February, we hopped freights from Melbourne to Sydney, the long way, through South Oz. In January last year, we unwittingly hopped to Perth, across the ";
+    "The ageing steel of a freight wagon makes for an unforgiving bed. The slightest imperfection on the tracks reverberates through the metal skeleton and into your ";
 
-  const linkText = "Nullarbor.";
+  const linkText = "own.";
   const linkUrl =
-    "https://cdn.glitch.me/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/boomba.MOV?v=1742359731215";
+    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/IMG_2783.MOV?v=1745723027182";
 
   let currentText = "";
   let i = 0;
-  const speed = 25;
+  const speed = 15;
 
   function typeLetter() {
     if (i < text.length) {
@@ -196,7 +196,7 @@ function showSecondImage() {
 
   const newImage = document.createElement("img");
   newImage.src =
-    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1742253748725";
+    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000008.JPG?v=1745747639027";
   newImage.alt = "A meaningful description";
   newImage.style.width = "100%";
   newImage.style.borderRadius = "0"; // Change this line to remove rounded corners
@@ -221,12 +221,11 @@ function showSecondImage() {
 function typeTextOnScroll(element) {
   console.log("Scroll detected, typing should begin."); // Debugging log
 
-  const textBefore = "Both trips involved being stuck in the middle of ";
-  const clickableWord = "nowhere";
-  const textAfter = " for days.";
+  const textBefore = "There's one rideable train out of Melbourne, it heads east to Dimboola, then on to ";
+  const clickableWord = "Adelaide.";
 
   let i = 0;
-  const speed = 25;
+  const speed = 15;
 
   // Ensure element is visible before typing starts
   element.style.opacity = "1";

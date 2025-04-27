@@ -3,7 +3,7 @@ window.onload = function () {
   const video = document.getElementById("video");
   const image = document.getElementById("myImage");
 
-  // Typing text element (was inside blackBox, now independent)
+  // Typing text element (first one)
   const textElement = document.createElement("p");
   textElement.style.color = "black";
   textElement.style.fontSize = "20px";
@@ -11,12 +11,12 @@ window.onload = function () {
   textElement.style.position = "absolute";
   textElement.style.opacity = 0; // Initially hidden
   textElement.style.transition = "opacity 1s ease";
-  textElement.style.paddingBottom = "200px"; // Fade-in effect
+  textElement.style.paddingBottom = "200px";
+  textElement.style.fontWeight = "bold";
 
   // New image to fade in after scrolling
   const newImage = document.createElement("img");
-  newImage.src =
-    "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000051.JPG?v=1744243352241";
+  newImage.src = "https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000006.JPG?v=1744165093061";
   newImage.id = "newImage";
   newImage.style.display = "none";
   newImage.style.opacity = 0;
@@ -28,8 +28,23 @@ window.onload = function () {
   newImage.style.top = "700px";
   newImage.style.zIndex = "10";
 
+  // Second typing text element (appears after scroll)
+  const textElement2 = document.createElement("p");
+  textElement2.style.color = "black";
+  textElement2.style.fontSize = "20px";
+  textElement2.style.fontFamily = "monospace";
+  textElement2.style.position = "absolute";
+  textElement2.style.opacity = 0; // Initially hidden
+  textElement2.style.transition = "opacity 1s ease";
+  textElement2.style.fontWeight = "bold";
+  textElement2.style.width = "400px";
+  textElement2.style.left = "115px"; // positioned to the left
+  textElement2.style.top = "615px";  // aligned near newImage
+  textElement2.style.zIndex = "9";
+
   document.body.appendChild(newImage);
   document.body.appendChild(textElement);
+  document.body.appendChild(textElement2);
 
   document.body.style.overflow = "hidden"; // Disable scrolling on page load
 
@@ -65,19 +80,7 @@ window.onload = function () {
 
       // Start the typing effect with the full original text
       typeText(
-        'Known as the "Crossroads of Australia," the remote town of Port Augusta serves as a transport hub for rail and road networks. ' +
-          "It sits north-west of Adelaide, where South Australia transforms from farmland into an arid red desert. " +
-          "Tig and I were confident we’d be able to board the train that travels from the Whyalla Steelworks to Newcastle. " +
-          "The train is scheduled to stop in Port Augusta for about an hour every morning before continuing on. " +
-          "This never happened. We were spotted by a rail worker in a ute when we arrived at the yard, forcing us to run and hide in a bush by the tracks. " +
-          "This bush became our home for 37 hours. For two days, nothing eastbound showed up. " +
-          "Around the 20 hour mark, Tig pulled the trigger on a go for broke supply run. " +
-          "I was sure he'd get pinched leaving the yard, but thankfully he wasn't. " +
-          "The closest water source was a two hour walk away, so our only way out of town could of pulled in and out while Tig was gone. " +
-          "Fat chance. Finally as we were coming to terms with another night's sleep in the bush, " +
-          "an Aurizon train travelling from Perth to Sydney pulled in. " +
-          "We immediately jumped on, only to anxiously wait on board for another three hours, illuminated by a spotlight. " +
-          'At about 3 o\'clock in the morning we finally left the "Crossroads of Australia," and were heading east into the desert towards Broken Hill.',
+        "The rolling hills east of Adelaide receded as the train rocketed through the city, giving way to dry, grassy plains dotted with trees. Our amazement at what we saw was tainted by anxiety, knowing the train might not stop in Port Augusta and continue through the Nullabor to ",
         textElement
       );
 
@@ -87,21 +90,92 @@ window.onload = function () {
     };
   }
 
-  // Fade in new image when scrolling past a certain point
+  // Fade in new image and second text when scrolling past a certain point
+  let newImageShown = false;
+
   window.addEventListener("scroll", function () {
-    if (window.scrollY > 200) {
-      if (newImage.style.display === "none") {
-        newImage.style.display = "block";
-        setTimeout(function () {
-          newImage.style.opacity = 1;
-        }, 50);
-      }
+    if (window.scrollY > 200 && !newImageShown) {
+      newImageShown = true;
+
+      newImage.style.display = "block";
+
+      setTimeout(function () {
+        newImage.style.opacity = 1;
+      }, 50);
+
+      setTimeout(function () {
+        textElement2.style.opacity = 1;
+        simpleTypeText(
+          "We waited in a bush by the tracks in Port Augusta for two days, with countless discussions as to whether or not we should bail. The heat was merciless, and any food or water was a two hour walk away. Our patience paid off when a Sydney bound train finally arrived in the middle of the night, and we were off to Broken Hill.",
+          textElement2
+        );
+      }, 1000);
     }
   });
 };
 
-// Typing text effect function
+// Typing text effect function WITH clickable Perth
 function typeText(text, element) {
+  let i = 0;
+  let typingParts = text.split("Perth.");
+  let brokenHillText = "Perth.";
+  let typingStep = "before";
+
+  function type() {
+    if (typingStep === "before") {
+      if (i < typingParts[0].length) {
+        element.innerHTML += typingParts[0][i];
+        i++;
+        setTimeout(type, 15);
+      } else {
+        typingStep = "link";
+        i = 0;
+
+        const clickable = document.createElement("span");
+        clickable.style.color = "red";
+        clickable.style.textDecoration = "underline";
+        clickable.style.cursor = "pointer";
+        clickable.style.transition = "color 0.3s";
+        clickable.onmouseover = function () {
+          this.style.color = "white";
+        };
+        clickable.onmouseout = function () {
+          this.style.color = "red";
+        };
+        clickable.onclick = function () {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+          });
+        };
+
+        element.appendChild(clickable);
+        type();
+      }
+    } else if (typingStep === "link") {
+      const clickable = element.querySelector("span");
+      if (i < brokenHillText.length) {
+        clickable.innerHTML += brokenHillText[i];
+        i++;
+        setTimeout(type, 15);
+      } else {
+        typingStep = "after";
+        i = 0;
+        type();
+      }
+    } else if (typingStep === "after") {
+      if (i < typingParts[1].length) {
+        element.innerHTML += typingParts[1][i];
+        i++;
+        setTimeout(type, 15);
+      }
+    }
+  }
+
+  type();
+}
+
+function simpleTypeText(text, element) {
   let i = 0;
   let typingParts = text.split("Broken Hill");
   let brokenHillText = "Broken Hill";
@@ -112,7 +186,7 @@ function typeText(text, element) {
       if (i < typingParts[0].length) {
         element.innerHTML += typingParts[0][i];
         i++;
-        setTimeout(type, 25);
+        setTimeout(type, 15);
       } else {
         typingStep = "link";
         i = 0;
@@ -123,7 +197,7 @@ function typeText(text, element) {
       if (i < brokenHillText.length) {
         element.lastChild.innerHTML += brokenHillText[i];
         i++;
-        setTimeout(type, 25);
+        setTimeout(type, 15);
       } else {
         typingStep = "after";
         i = 0;
@@ -134,7 +208,7 @@ function typeText(text, element) {
       if (i < typingParts[1].length) {
         element.innerHTML += typingParts[1][i];
         i++;
-        setTimeout(type, 25);
+        setTimeout(type, 15);
       }
     }
   }

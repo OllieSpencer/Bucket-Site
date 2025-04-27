@@ -1,6 +1,6 @@
 /* Body styling */
 body {
-  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000031.JPG?v=1742290578621");
+  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000040.JPG?v=1745747861190");
   background-size: cover;
   background-position: center;
   background-repeat: repeat-y;
@@ -8,7 +8,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0; /* Remove default margin */
   padding-top: 130px; /* Space at the top for headline */
-  padding-bottom: 1030px; /* Ensures extra space at the bottom for scrolling */
+  padding-bottom: 800px; /* Ensures extra space at the bottom for scrolling */
   box-sizing: border-box; /* Prevent padding from affecting body height */
   min-height: 100%; /* Ensure body takes at least the height of the viewport */
   overflow-y: scroll; /* Allow scrolling */
