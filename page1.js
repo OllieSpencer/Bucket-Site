@@ -221,8 +221,8 @@ function showSecondImage() {
 function typeTextOnScroll(element) {
   console.log("Scroll detected, typing should begin."); // Debugging log
 
-  const textBefore = "There's one rideable train out of Melbourne, it heads east to Dimboola, then on to ";
-  const clickableWord = "Adelaide.";
+  const textBefore = "There's one rideable train out of Melbourne, it heads east to Adelaide, then on to ";
+  const clickableWord = "Port Augusta.";
 
   let i = 0;
   const speed = 15;
