@@ -80,3 +80,13 @@ img {
   left: 10%; /* Position it at the middle of the left half */
   transform: translateY(-50%);
 }
+
+.highlight-link {
+  color: red;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.highlight-link:hover {
+  color: white;
+}

@@ -144,33 +144,7 @@ function showScrollDown() {
   scrollDownText.classList.add("scroll-down");
 
   // Create the text before "here"
-  const textBefore = document.createTextNode("click ");
-
-  // Create the "here" hyperlink
-  const hereLink = document.createElement("a");
-  hereLink.href = "page3.html"; // Update with the correct link
-  hereLink.textContent = "here";
-  hereLink.style.color = "red";
-  hereLink.style.cursor = "pointer";
-  hereLink.style.textDecoration = "underline";
-  hereLink.style.transition = "color 0.3s ease";
-
-  // Hover effects
-  hereLink.addEventListener("mouseover", function () {
-    hereLink.style.color = "white";
-  });
-
-  hereLink.addEventListener("mouseout", function () {
-    hereLink.style.color = "red";
-  });
-
-  // Create the text after "here"
-  const textAfter = document.createTextNode(" or scroll down");
-
-  // Append everything in order
-  scrollDownText.appendChild(textBefore);
-  scrollDownText.appendChild(hereLink);
-  scrollDownText.appendChild(textAfter);
+scrollDownText.textContent = "scroll down";
 
   // Add it to the foreground
   document.querySelector(".foreground").appendChild(scrollDownText);

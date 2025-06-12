@@ -1,0 +1,61 @@
+/* Body styling */
+body {
+  background-image: url("https://cdn.glitch.global/46ef7de7-8069-4c1a-9681-2c2ef81f5cad/000055.JPG?v=1749645011802");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  margin: 0; /* Remove default margin */
+  padding-top: 130px; /* Space at the top for headline */
+  padding-bottom: 800px; /* Ensures extra space at the bottom for scrolling */
+  box-sizing: border-box; /* Prevent padding from affecting body height */
+  min-height: 100%; /* Ensure body takes at least the height of the viewport */
+  overflow-y: scroll; /* Allow scrolling */
+}
+
+/* Container for all content */
+#content-container {
+  position: fixed;
+  min-height: 100%; /* Ensures content height allows scrolling */
+}
+
+/* Styling for the image */
+#myImage {
+  display: none;
+  width: 600px;
+  height: auto;
+  position: absolute;
+  top: 390px;
+  right: 200px;
+  transform: translateY(-50%);
+  margin: 0;
+  z-index: 10;
+}
+
+/* Styling for the headline */
+h1 {
+  position: fixed;
+  top: 130px;
+  left: 160px;
+  padding: 15px;
+  color: black;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+  margin: 0;
+  font-family: "Courier New", monospace;
+}
+
+h1:hover {
+  color: green;
+}
+
+/* Styling for the video */
+video {
+  display: none;
+  width: 25%;
+  margin: 0 auto;
+  position: fixed;
+  top: 50px;
+  left: 120px;
+}
