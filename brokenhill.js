@@ -2,10 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const text = "New to the ";
   const clickableText = "Yabba?";
   const container = document.getElementById("typewriter");
-  const video = document.getElementById("myVideo"); // First video
-  const secondVideo = document.getElementById("secondVideo"); // Second video
-  const textDiv = document.getElementById("text"); // The #text div
-  const fullText = "Once we'd reached the outback, I reflected on my perception of the Australian landscape being skewed by my background. Writing the bush as an alien, inhospitable land to be bested perpetuates a white narrative rooted in a colonial ignorance of country. The juxtaposition of farming infrastructure against nature amplified these thoughts throughout the trip, the remotest areas of the desert were eerily peppered with disused grain silos and forgotten machinery. "; // Full text for #text div
+  const video = document.getElementById("myVideo");
+  const secondVideo = document.getElementById("secondVideo");
+  const textDiv = document.getElementById("text");
+
+  const fullText = `Fatigue and dehydration had thoroughly set in once the sun had risen. Any sleep we got was short and rough. We boarded the train in a hurry, with less water than we needed. We were stuffing our sleeping bags under a thirty-five-degree sun that quickly rose to forty-two. The red dirt took over as we got deeper into the desert. At about midday we pulled into Broken Hill, the filming location for Wake in Fright, the famous cultural critique that held a mirror up to Australia, highlighting our dysfunctional rituals and excess. We were dying to get off and explore the inspiration for the fictional ‘Bundanyabba’ and find some shade. But we had somewhere to be in northern NSW and couldn’t spare the time. The train rolled into the Broken Hill yard and slowed to a stop next to a group of Aurizon rail workers. We dropped to the deck of the wagon to hide, the heat of the metal plate searing what skin was exposed. We stared at the sun for a gruelling hour without moving a muscle or making a sound. My sunburnt nose began to sting, and my lips crusted over. We could hear the workers a few metres away, if they saw us, we were done. The air brake finally hissed, signalling we were leaving. The boar eventually chugged its way out of the yard. We could finally quench our thirst. Our next stop was several hours away, in  <a href="https://bucket-site.glitch.me/parkes.html" class="highlight-link">Parkes</a>.`;
 
   if (!container) {
     console.error("Error: #typewriter element not found in HTML.");
@@ -14,82 +15,73 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let i = 0, j = 0;
 
-  // Initially hide the #text div
   textDiv.style.display = "none";
 
-  // Create a button instead of a link
   const button = document.createElement("button");
   button.style.textDecoration = "underline";
-  button.style.color = "inherit"; // Keeps original color
-  button.style.backgroundColor = "transparent"; // Makes the background transparent
-  button.style.border = "none"; // Removes border
-  button.style.cursor = "pointer"; // Changes cursor to pointer
+  button.style.color = "inherit";
+  button.style.backgroundColor = "transparent";
+  button.style.border = "none";
+  button.style.cursor = "pointer";
   button.onmouseover = () => (button.style.color = "red");
   button.onmouseout = () => (button.style.color = "inherit");
 
-  // When button is clicked, hide the typewriter and play the first video
   button.addEventListener("click", () => {
-    container.style.display = "none"; // Hide the #typewriter container
-    video.style.display = "block"; // Show the first video
-    video.play(); // Play the first video
+    container.style.display = "none";
+    video.style.display = "block";
+    video.play();
 
-    // Delay the start of the second video by 5 seconds
     setTimeout(() => {
-      secondVideo.style.display = "block"; // Show the second video after delay
-      secondVideo.play(); // Play the second video after delay
-    }, 5000); // 5000ms (5 seconds) delay before the second video starts
+      secondVideo.style.display = "block";
+      secondVideo.play();
+    }, 5000);
   });
 
-  // Function to type the initial text (for typewriter effect)
   function typeEffect() {
     if (i < text.length) {
       container.textContent += text.charAt(i);
       i++;
-      setTimeout(typeEffect, 15); // Adjust typing speed here
+      setTimeout(typeEffect, 15);
     } else if (i === text.length) {
-      container.appendChild(button); // Append the button after typing the text
+      container.appendChild(button);
       typeClickableText();
     }
   }
 
-  // Function to type the clickable text ("Yabba?")
   function typeClickableText() {
     if (j < clickableText.length) {
       button.textContent += clickableText.charAt(j);
       j++;
-      setTimeout(typeClickableText, 15); // Adjust typing speed here
+      setTimeout(typeClickableText, 15);
     }
   }
 
-  // Function to type the content of the #text div
   function typeTextEffect() {
     let k = 0;
-    textDiv.textContent = ""; // Clear existing content
+    let displayed = "";
     function typeFullText() {
       if (k < fullText.length) {
-        textDiv.textContent += fullText.charAt(k);
+        displayed += fullText[k];
+        textDiv.innerHTML = displayed;
         k++;
-        setTimeout(typeFullText, 15); // Adjust typing speed here
+        setTimeout(typeFullText, 15);
       }
     }
-    typeFullText(); // Start typing the full text
+    typeFullText();
   }
-  
+
   const image = document.querySelector("img");
-  
-  // Event listener for when the second video ends
+
   secondVideo.addEventListener("ended", () => {
-    secondVideo.style.display = "none"; // Hide the second video after it ends
+    secondVideo.style.display = "none";
     image.style.opacity = "1";
   });
 
-  // Event listener for when the first video ends
   video.addEventListener("ended", () => {
-    video.style.display = "none"; // Hide the first video after it ends
-    textDiv.style.display = "block"; // Show the #text div after the first video ends
-    typeTextEffect(); // Start the typing effect on the text div after video ends
+    video.style.display = "none";
+    textDiv.style.display = "block";
+    typeTextEffect();
   });
 
-  // Initial typing effect start
-  setTimeout(typeEffect, 1000); // Delay before typing starts
+  setTimeout(typeEffect, 1000);
 });
